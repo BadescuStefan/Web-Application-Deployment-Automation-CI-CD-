@@ -24,6 +24,7 @@ steps:
     Dockerfile: 'docker/Dockerfile'
     tags: |
       $(Build.BuildId)
+    context: .
 
 - task: AzureCLI@2
   inputs:
