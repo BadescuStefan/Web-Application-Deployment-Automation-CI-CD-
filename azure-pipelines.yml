@@ -1,2 +1,36 @@
-test
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r src/requirements.txt
+    python src/app.py
+  displayName: 'Install dependencies and run Flask app'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: '<your-azure-container-registry>'
+    repository: '<your-image-name>'
+    command: 'buildAndPush'
+    Dockerfile: 'docker/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '<your-azure-subscription>'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp config container set --name webapp-cicd --resource-group rg-webapp-cicd --docker-custom-image-name <your-image-name>:$(Build.BuildId)
+  displayName: 'Deploy to Azure App Service'
 
