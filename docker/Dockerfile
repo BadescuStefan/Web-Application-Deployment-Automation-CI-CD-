@@ -5,10 +5,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the contents of the src directory from the current context into /app in the container
-COPY src/ /app
+COPY ../src/ /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
