@@ -18,7 +18,7 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'webappcicd'
+    containerRegistry: 'webappcicd-acr'
     repository: 'webappcicd.azurecr.io/flask-app'
     command: 'buildAndPush'
     Dockerfile: 'docker/Dockerfile'
