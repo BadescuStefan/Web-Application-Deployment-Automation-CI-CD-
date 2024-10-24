@@ -13,8 +13,8 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     pip install -r src/requirements.txt
-    python src/app.py
-  displayName: 'Install dependencies and run Flask app'
+    python -m flask --version
+  displayName: 'Install dependencies and verify Flask version'
 
 - task: Docker@2
   inputs:
