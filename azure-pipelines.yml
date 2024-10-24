@@ -21,7 +21,7 @@ steps:
     containerRegistry: 'webappcicd-acr'
     repository: 'webappcicd.azurecr.io/flask-app'
     command: 'buildAndPush'
-    Dockerfile: 'docker/Dockerfile'
+    Dockerfile: 'Dockerfile'
     tags: |
       $(Build.BuildId)
     context: $(Build.SourcesDirectory)
