@@ -18,8 +18,8 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: '<your-azure-container-registry>'
-    repository: '<your-image-name>'
+    containerRegistry: 'webappcicd'
+    repository: 'webappcicd.azurecr.io/flask-app'
     command: 'buildAndPush'
     Dockerfile: 'docker/Dockerfile'
     tags: |
@@ -27,10 +27,9 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: '<your-azure-subscription>'
+    azureSubscription: 'webappcicd'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az webapp config container set --name webapp-cicd --resource-group rg-webapp-cicd --docker-custom-image-name <your-image-name>:$(Build.BuildId)
+      az webapp config container set --name webapp-cicd --resource-group ResourceGroup2 --docker-custom-image-name webappcicd.azurecr.io/flask-app:$(Build.BuildId)
   displayName: 'Deploy to Azure App Service'
-
