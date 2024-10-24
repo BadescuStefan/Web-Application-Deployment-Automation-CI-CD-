@@ -24,7 +24,7 @@ steps:
     Dockerfile: 'docker/Dockerfile'
     tags: |
       $(Build.BuildId)
-    context: .
+    context: $(Build.SourcesDirectory)
 
 - task: AzureCLI@2
   inputs:
@@ -34,3 +34,4 @@ steps:
     inlineScript: |
       az webapp config container set --name webapp-cicd --resource-group ResourceGroup2 --docker-custom-image-name webappcicd.azurecr.io/flask-app:$(Build.BuildId)
   displayName: 'Deploy to Azure App Service'
+
