@@ -32,6 +32,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-     az webapp config container set --name webappcicd --resource-group ResourceGroup2 --docker-custom-image-name webappcicd.azurecr.io/flask-app:$(Build.BuildId)
+        az webapp config container set --name webappcicd --resource-group ResourceGroup2 --container-image-name webappcicd.azurecr.io/flask-app:$(Build.BuildId)
+
   displayName: 'Deploy to Azure App Service'
 
