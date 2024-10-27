@@ -27,6 +27,6 @@ resource "azurerm_app_service" "app_service" {
   app_service_plan_id = azurerm_app_service_plan.asp.id
 
   site_config {
-    linux_fx_version = "DOCKER|webappcicd.azurecr.io/flask-app:latest"  # Înlocuiește <image_name> cu imaginea corectă
+    linux_fx_version = "DOCKER|webappcicd.azurecr.io/flask-app:latest" 
   }
 }
